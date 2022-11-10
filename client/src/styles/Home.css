@@ -1,0 +1,105 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.intro {
+  margin: 2em 1em;
+  padding: 1em;
+  max-width: 900px;
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+.inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 0.5em;
+}
+
+label {
+  display: block;
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+
+input[type="number"] {
+  border: none;
+  border-bottom: 2px solid#06d6d6;
+  background: none;
+  padding: 4px;
+  color: #fff;
+  font-size: medium;
+  margin-right: 1em;
+}
+
+input[type="number"]:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 1; /* Firefox */
+}
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  color: white;
+  display: inline-block;
+  border-radius: 2px;
+  margin-block: 1em;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+  cursor: pointer;
+}
+
+.submit {
+  font-size: medium;
+  font-family: "Roboto Mono", monospace;
+  border: 2px solid #06d6d6;
+  background: none;
+  color: #fff;
+  border-radius: 2px;
+  padding-inline: 20px;
+  padding-block: 6px;
+  cursor: pointer;
+  width: 150px;
+}
+
+.submit:hover {
+  background-color: #05a4a4;
+  color: #ffffff;
+}

@@ -1,0 +1,21 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: 1.5em;
+  padding-inline: 2.5em;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navlink {
+  margin-left: 1em;
+}
+
+.navlink:hover {
+  border-bottom: 2px solid #06d6d6;
+}
