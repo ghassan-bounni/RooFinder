@@ -57,7 +57,7 @@ const Home = () => {
         <Wrapper>
           <Step2
             prevStep={prevStep}
-            nextStep={nextStep}
+            // nextStep={nextStep}
             handleChange={handleChange}
             values={state}
           />

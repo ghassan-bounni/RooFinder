@@ -41,10 +41,10 @@ const Step1 = ({ handleChange, handleSubmit, values }) => {
               onChange={handleChange("image")}
               required
             />
-            <label htmlFor="image">
+            <label htmlFor="image" style={{ fontSize: "1.3em" }}>
               {img.current?.value
                 ? img.current.value.split("\\").pop()
-                : "Choose an image..."}
+                : "Upload an image..."}
             </label>
           </div>
           {img.current?.files[0] && (
@@ -57,8 +57,8 @@ const Step1 = ({ handleChange, handleSubmit, values }) => {
             </div>
           )}
         </div>
-        <button type="submit" className="submit">
-          Submit
+        <button type="submit" className="button">
+          Analyze
         </button>
       </form>
     </div>
