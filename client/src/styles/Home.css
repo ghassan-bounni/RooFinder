@@ -3,9 +3,11 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  padding: 5px;
 }
 .intro {
-  margin: 2em 1em;
+  margin-top: 2em;
+  margin-top: 1em;
   padding: 1em;
   max-width: 900px;
   text-align: center;
@@ -22,6 +24,7 @@ form {
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
+  padding: 1em;
 }
 .inputs {
   display: flex;
