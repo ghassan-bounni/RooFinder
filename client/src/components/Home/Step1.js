@@ -9,8 +9,8 @@ const Step1 = ({ handleChange, handleSubmit, values }) => {
       <div className="intro">
         <h2>Step 1</h2>
         <p>
-          Upload an aerial image along with its scale (in meter per pixel) to
-          analyze.
+          Upload an aerial image (n x n) along with its scale (in meter per
+          pixel) to analyze.
         </p>
       </div>
       <form onSubmit={handleSubmit}>
@@ -22,6 +22,7 @@ const Step1 = ({ handleChange, handleSubmit, values }) => {
             <input
               type="number"
               min="0"
+              step="0.001"
               placeholder="0"
               id="scale"
               name="scale"
@@ -47,15 +48,16 @@ const Step1 = ({ handleChange, handleSubmit, values }) => {
                 : "Upload an image..."}
             </label>
           </div>
-          {img.current?.files[0] && (
-            <div style={{ width: "155px" }}>
-              <img
-                src={URL.createObjectURL(img.current.files[0])}
-                alt={image.name}
-                style={{ width: "100%", height: "auto", display: "block" }}
-              />
-            </div>
-          )}
+          {img.current?.files[0] &&
+            !["tif", "tiff"].includes(image.name.split(".").pop()) && (
+              <div style={{ width: "155px" }}>
+                <img
+                  src={URL.createObjectURL(img.current.files[0])}
+                  alt={image.name}
+                  style={{ width: "100%", height: "auto", display: "block" }}
+                />
+              </div>
+            )}
         </div>
         <button type="submit" className="button">
           Analyze

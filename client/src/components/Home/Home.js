@@ -10,6 +10,7 @@ const Home = () => {
     step: 1,
     scale: 0,
     image: null,
+    data: null,
   });
 
   // go back to previous step
@@ -21,6 +22,25 @@ const Home = () => {
     setState({ ...state, step: state.step + 1 });
   };
 
+  const fetchSegmentedImage = async () => {
+    const response = await Axios.post(
+      "/api/segment",
+      {
+        scale: state.scale,
+        image: state.image,
+      },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    setState({
+      ...state,
+      step: state.step + 1,
+      data: response.data,
+    });
+  };
   // handle field change
   const handleChange = (input) => (e) => {
     setState({
@@ -30,14 +50,7 @@ const Home = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    Object.entries(state).forEach(([key, value]) => {
-      if (key !== "step") {
-        formData.append(key, value);
-      }
-    });
-    console.log(state.image);
-    nextStep();
+    fetchSegmentedImage();
   };
 
   switch (state.step) {
@@ -59,7 +72,7 @@ const Home = () => {
             prevStep={prevStep}
             // nextStep={nextStep}
             handleChange={handleChange}
-            values={state}
+            data={state.data}
           />
         </Wrapper>
       );
