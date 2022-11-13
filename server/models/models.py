@@ -6,19 +6,14 @@ from models.mrcnn import visualize
 from models.mrcnn.model import log
 
 from tensorflow.keras.applications.vgg16 import VGG16
-from tensorflow.keras.models import Model, Sequential
+from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import Flatten
 
 import numpy as np
 import skimage
-import matplotlib.pyplot as plt
-from skimage.measure import find_contours
-from matplotlib import patches
-from matplotlib.patches import Polygon
 import os
 import cv2
-import tensorflow
 
 
 class MrcnnConfig(Config):
