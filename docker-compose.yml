@@ -5,7 +5,7 @@ services:
     build: ./server
     restart: always
     ports:
-    - "80:5000"
+    - 80:5000
     volumes:
       - ./server:/server
     environment:
@@ -15,7 +15,7 @@ services:
     build: ./client
     restart: always
     ports:
-      -"3000:3000"
+      - 3000:3000
     volumes:
       - ./client:/app
     depends_on:
