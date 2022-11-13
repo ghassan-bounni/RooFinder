@@ -4,9 +4,12 @@ import os
 import shutil
 import sys
 from models.models import MaskRCNN
+from models.models import TypeClassifier
 import tensorflow
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app)
 UPLOAD_FOLDER = "static/"
 ROOT_DIR = "/server/"
 sys.path.append(ROOT_DIR)
@@ -16,7 +19,8 @@ graph = tensorflow.compat.v1.get_default_graph()
 session = tensorflow.compat.v1.Session()
 
 set_session(session)
-model = MaskRCNN()
+mrcnn = MaskRCNN()
+classifier = TypeClassifier()
 
 
 @app.route("/")
@@ -25,6 +29,7 @@ def hello_world():
 
 
 @app.route("/api/segment", methods=["POST"])
+@cross_origin()
 def segment():
     global graph
     global session
@@ -33,10 +38,15 @@ def segment():
         clear_static("static")
         image = request.files["image"]
         scale = request.form.get("scale")
-        imgpath = os.path.join(
-            app.config['UPLOAD_FOLDER'], image.filename)
+
+        imgpath = os.path.join(app.config['UPLOAD_FOLDER'], image.filename)
         request.files["image"].save(imgpath)
-        response = model.detect(imgpath, scale)
+
+        cropped_images, response = mrcnn.detect(imgpath, scale)
+
+        classes = [classifier.infer_type(image) for image in cropped_images]
+        for index, image in enumerate(response["cropped"]):
+            response["cropped"][index]["type"] = classes[index]
 
     return jsonify(response)
 
@@ -54,8 +64,11 @@ def clear_static(path):
 
 
 def main():
-    """Run the Flask app."""
-    app.run(port=int(os.environ.get('PORT', 8000)), debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get('PORT', 5000)),
+        debug=os.environ.get('DEBUG') == 1
+    )
 
 
 if __name__ == "__main__":

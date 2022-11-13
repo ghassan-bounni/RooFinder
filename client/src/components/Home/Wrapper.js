@@ -11,6 +11,16 @@ const Wrapper = ({ children }) => {
           make this information easily available for both building owners and
           solar energy developers.
         </p>
+        <p
+          style={{
+            position: "fixed",
+            bottom: "3%",
+            left: "2%",
+            // color: "#bcbcbc",
+          }}
+        >
+          Trinity-AI
+        </p>
       </div>
       {children}
     </div>

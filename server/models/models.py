@@ -5,6 +5,11 @@ import models.mrcnn.model as modellib
 from models.mrcnn import visualize
 from models.mrcnn.model import log
 
+from tensorflow.keras.applications.vgg16 import VGG16
+from tensorflow.keras.models import Model, Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Flatten
+
 import numpy as np
 import skimage
 import matplotlib.pyplot as plt
@@ -12,6 +17,8 @@ from skimage.measure import find_contours
 from matplotlib import patches
 from matplotlib.patches import Polygon
 import os
+import cv2
+import tensorflow
 
 
 class MrcnnConfig(Config):
@@ -51,22 +58,16 @@ class MaskRCNN:
         imgpath = "/".join(imgpath.split("/")[:-1])+"/masked_" + \
             imgpath.split("/")[-1]
 
-        cropped_imgs = self.crop_image(image, imgpath, r, shape, scale)
+        cropped_images, data = self.crop_image(image, imgpath, r, shape, scale)
 
         image = self.apply_masks(image, r["masks"])
         skimage.io.imsave(imgpath, image)
 
-        cropped = []
-        for img in cropped_imgs:
-            skimage.io.imsave(img["path"], img["image"])
-            cropped.append({
-                "name": img["name"],
-                "area": img["area"],
-                "path": img["path"],
-            })
-        return {
+        for index, img in enumerate(data):
+            skimage.io.imsave(img["path"], cropped_images[index])
+        return cropped_images, {
             "masked_img": imgpath,
-            "cropped":  cropped
+            "cropped":  data
         }
 
     def load_img(self, imgpath):
@@ -80,13 +81,17 @@ class MaskRCNN:
         if image.shape[-1] == 4:
             image = image[..., :3]
 
-        # rescale the image
-        resized_image = skimage.transform.resize(
-            image.astype(np.uint8), (512, 512), anti_aliasing=True)
-        rescaled_image = 255*resized_image
-        image = rescaled_image.astype(np.uint8)
+        image = self.resize_img(image)
 
         return image, shape
+
+    def resize_img(self, img, shape=(512, 512)):
+        # rescale the image
+        resized_image = skimage.transform.resize(
+            img.astype(np.uint8), shape, anti_aliasing=True)
+        rescaled_image = 255*resized_image
+        image = rescaled_image.astype(np.uint8)
+        return image
 
     def apply_masks(self, image, masks):
         N = masks.shape[-1]
@@ -102,18 +107,19 @@ class MaskRCNN:
     def crop_image(self, image, path, r, shape, scale):
         path, _ = os.path.splitext(path)
         filename = path.split("/")[-1]
-        cropped_images = []
+        data = []
+        images = []
         for index, roi in enumerate(r['rois']):
             roi_cropped = self.crop(image, roi)
             mask_cropped = self.crop(r['masks'], roi)
             area = self.calculate_area(mask_cropped, scale, shape)
-            cropped_images.append({
+            images.append(roi_cropped)
+            data.append({
                 "name": filename+"_"+str(index),
-                "image": roi_cropped,
                 "area": area,
                 "path": "static/cropped/"+filename+"_"+str(index)+".png"
             })
-        return cropped_images
+        return images, data
 
     def crop(self, image, roi):
         roi_cropped = image[int(roi[0]):int(
@@ -121,6 +127,25 @@ class MaskRCNN:
         return roi_cropped
 
     def calculate_area(self, mask, scale, shape):
-        scale = float(scale) * shape[0] / 512
+        scale = float(scale) * (shape[0] / 512)
         area = int(np.sum(mask) * scale)
         return area
+
+
+class TypeClassifier:
+    def __init__(self):
+        self.model = Sequential()
+        self.model.add(VGG16(include_top=False, input_shape=(224, 224, 3)))
+
+        self.model.add(Flatten())
+        self.model.add(Dense(1024, activation='relu'))
+        self.model.add(Dense(3, activation='softmax'))
+        self.model.load_weights('models/classweights.h5')
+
+    def infer_type(self, image):
+        resized = cv2.resize(image, (224, 224), interpolation=cv2.INTER_AREA)
+        result = self.model.predict([[resized]], steps=1)[0]
+        prediction = np.argmax(result, axis=-1)
+        types = ["Brick", "Concrete", "Steel"]
+        prediction = types[prediction]
+        return prediction

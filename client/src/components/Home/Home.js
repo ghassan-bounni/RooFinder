@@ -24,7 +24,7 @@ const Home = () => {
 
   const fetchSegmentedImage = async () => {
     const response = await Axios.post(
-      "/api/segment",
+      "http://127.0.0.1:8000/api/segment",
       {
         scale: state.scale,
         image: state.image,

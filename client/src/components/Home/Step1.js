@@ -22,7 +22,7 @@ const Step1 = ({ handleChange, handleSubmit, values }) => {
             <input
               type="number"
               min="0"
-              step="0.001"
+              step="0.0001"
               placeholder="0"
               id="scale"
               name="scale"
