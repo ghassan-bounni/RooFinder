@@ -54,7 +54,7 @@ const About = () => {
         <h3 style={{ marginBottom: "10px" }}>
           End-to-End solution based on U-NET architectures which consists of:
         </h3>
-        <ol>
+        <ul>
           <li>Input: Capturing aerial/satellite image and its scaling</li>
           <li>
             ML model for Roof segmentation + classification model + image
@@ -64,7 +64,7 @@ const About = () => {
             Output: Labeled image + Extracted roof + type and area of the roof +
             solar panel placement
           </li>
-        </ol>
+        </ul>
       </div>
       <div
         style={{ maxWidth: "800px", textAlign: "center", marginBlock: "2em" }}
@@ -73,7 +73,7 @@ const About = () => {
           Other primitive non-End-to-End approaches consisting on separate tasks
           and for each task, a model was assigned:
         </h3>
-        <ol>
+        <ul>
           <li>
             Image Segmentation + First classification stage (ANN) + Second
             classification stage (SVM): K-means clustering is used for image
@@ -86,7 +86,7 @@ const About = () => {
             using SVM helps to detect initially missed rooftops and reduces
             false positives in the first classification result.
           </li>
-        </ol>
+        </ul>
       </div>
       <h1 style={{ marginBlock: "1em" }}>
         The proposed approach to solving the problem
@@ -95,7 +95,7 @@ const About = () => {
         <h3 style={{ marginBottom: "10px" }}>
           Our approach consists of the following steps:
         </h3>
-        <ol>
+        <ul>
           <li>
             A mask R-CNN based model used for segmenting an aerial/satellite
             image, rescale it and applying the model in order to detect the
@@ -110,8 +110,18 @@ const About = () => {
             Using image processing and scaling units, we can calculate the total
             area of available clean rooftop for solar panels installation.
           </li>
-        </ol>
+        </ul>
       </div>
+      <p
+        style={{
+          position: "fixed",
+          bottom: "3%",
+          left: "2%",
+          // color: "#bcbcbc",
+        }}
+      >
+        Trinity-AI
+      </p>
     </div>
   );
 };

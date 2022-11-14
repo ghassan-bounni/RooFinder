@@ -109,6 +109,11 @@ input[type="number"]::-webkit-outer-spin-button {
   color: #ffffff;
 }
 
+.loading {
+  color: #ffffff;
+  background-color: #05a4a4;
+}
+
 .step2 .nav {
   display: flex;
   margin-block: 2em;

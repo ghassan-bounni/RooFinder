@@ -1,7 +1,9 @@
 import React, { useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const Step1 = ({ handleChange, handleSubmit, values }) => {
-  const { scale, image } = values;
+  const { scale, image, loading } = values;
   const img = useRef();
 
   return (
@@ -59,8 +61,16 @@ const Step1 = ({ handleChange, handleSubmit, values }) => {
               </div>
             )}
         </div>
-        <button type="submit" className="button">
-          Analyze
+        <button
+          type="submit"
+          className={loading ? "button loading" : "button"}
+          disabled={loading}
+        >
+          {loading ? (
+            <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
+          ) : (
+            "Analyze"
+          )}
         </button>
       </form>
     </div>

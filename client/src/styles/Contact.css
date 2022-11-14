@@ -1,0 +1,18 @@
+.links {
+  display: flex;
+  margin: 1em;
+}
+.contact-box {
+  border: 2px solid #06d6d6;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+}

@@ -11,6 +11,7 @@ const Home = () => {
     scale: 0,
     image: null,
     data: null,
+    loading: false,
   });
 
   // go back to previous step
@@ -23,6 +24,7 @@ const Home = () => {
   };
 
   const fetchSegmentedImage = async () => {
+    setState({ ...state, loading: true });
     const response = await Axios.post(
       "https://roofinder-api.herokuapp.com/api/segment",
       {
@@ -38,6 +40,7 @@ const Home = () => {
     setState({
       ...state,
       step: state.step + 1,
+      loading: false,
       data: response.data,
     });
   };
