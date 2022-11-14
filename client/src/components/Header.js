@@ -24,6 +24,12 @@ const Header = () => {
           <Link to="/contact" className="navlink">
             Contact
           </Link>
+          <a
+            href="https://github.com/ghassan-bounni/RooFinder"
+            className="navlink"
+          >
+            GitHub Repo
+          </a>
         </ul>
       </div>
     </header>
