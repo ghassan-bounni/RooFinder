@@ -92,7 +92,6 @@ const Contact = () => {
           position: "fixed",
           bottom: "3%",
           left: "2%",
-          // color: "#bcbcbc",
         }}
       >
         Trinity-AI

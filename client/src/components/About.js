@@ -4,6 +4,7 @@ import React from "react";
 const About = () => {
   return (
     <div
+      className="about"
       style={{
         textAlign: "center",
         display: "flex",
@@ -16,21 +17,13 @@ const About = () => {
         Solar energy is a favorable and freely available resource to address the
         coming energy breaking point without polluting the environment. Unlike
         traditional fossil fuels, it will not run out quickly.
-        <br /> <br />
-        Solar panels also cool buildings by acting as "roof shades”. While a
-        roof without panels would allow heat to enter the building, they absorb
-        the sun's rays and direct them away from the roof.
         <br />
         <br /> Calculating each rooftop's solar potential can take anywhere from
         one hour to two full days, making the rooftop solar assessment process
         time-consuming and costly. Due to this, the unit economics of solar
         projects have significantly deteriorated, with the cost of sales
         accounting for up to 40% of total project costs in the solar industry.{" "}
-        <br /> <br /> Solar panels are a great option for people who want to "go
-        green" and protect the environment around the world. However, the
-        utility sector requires intelligent systems that can effectively enhance
-        the integration of renewable energy sources. <br />
-        <br />
+        <br /> <br />
         Automating the process of finding rooftops for solar photovoltaic
         installations to drastically reduce the cost and make this information
         easily available for both building owners and solar energy developers.
@@ -91,7 +84,7 @@ const About = () => {
       <h1 style={{ marginBlock: "1em" }}>
         The proposed approach to solving the problem
       </h1>
-      <div style={{ maxWidth: "800px", marginBlock: "1em" }}>
+      <div style={{ maxWidth: "800px", marginTop: "1em", marginBottom: "3em" }}>
         <h3 style={{ marginBottom: "10px" }}>
           Our approach consists of the following steps:
         </h3>
@@ -112,16 +105,6 @@ const About = () => {
           </li>
         </ul>
       </div>
-      <p
-        style={{
-          position: "fixed",
-          bottom: "3%",
-          left: "2%",
-          // color: "#bcbcbc",
-        }}
-      >
-        Trinity-AI
-      </p>
     </div>
   );
 };

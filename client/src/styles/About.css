@@ -1,0 +1,5 @@
+@media (max-width: 920px) {
+  .about * {
+    max-width: 70vw !important;
+  }
+}
