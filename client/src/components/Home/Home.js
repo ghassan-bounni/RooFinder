@@ -26,7 +26,7 @@ const Home = () => {
   const fetchSegmentedImage = async () => {
     setState({ ...state, loading: true });
     const response = await Axios.post(
-      "https://roofinder-api.herokuapp.com/api/segment",
+      "http://ec2-3-144-193-133.us-east-2.compute.amazonaws.com/api/segment",
       {
         scale: state.scale,
         image: state.image,

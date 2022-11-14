@@ -31,7 +31,10 @@ const Step2 = ({ prevStep, nextStep, data }) => {
           }}
         >
           <img
-            src={"https://roofinder-api.herokuapp.com/" + data.masked_img}
+            src={
+              "http://ec2-3-144-193-133.us-east-2.compute.amazonaws.com/" +
+              data.masked_img
+            }
             alt="segmentation"
             style={{ width: "100%" }}
           />
@@ -58,35 +61,24 @@ const Step2 = ({ prevStep, nextStep, data }) => {
                   flexWrap: "wrap",
                 }}
               >
-                {/* <input
-                  type="checkbox"
-                  checked={item.checked}
-                  value={index}
-                  hidden
-                /> */}
                 <div style={{ width: "140px" }}>
                   <p>Rooftop {index}:</p>
                   <p>Area: {item.area} m^2</p>
                   <p>Type: {item.type}</p>
                 </div>
                 <img
-                  src={"https://roofinder-api.herokuapp.com/" + item.path}
+                  src={
+                    "http://ec2-3-144-193-133.us-east-2.compute.amazonaws.com/" +
+                    item.path
+                  }
                   alt="Rooftop"
                   style={{
                     width: "100px",
                     border: item.checked ? "3px solid #06d6d6" : "none",
                   }}
-                  // onClick={(e) => {
-                  //   const temp = data.cropped;
-                  //   temp[index].checked = !temp[index].checked;
-                  //   setResults({ ...results, images: temp });
-                  // }}
                 />
               </li>
             );
-            // } else {
-            //   return null;
-            // }
           })}
         </ul>
       </div>
