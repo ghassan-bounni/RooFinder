@@ -7,7 +7,7 @@ const Step1 = ({ handleChange, handleSubmit, values }) => {
   return (
     <div>
       <div className="intro">
-        <h2>Step 1</h2>
+        <h2>Let's Analyze!</h2>
         <p>
           Upload an aerial image (n x n) along with its scale (in meter per
           pixel) to analyze.

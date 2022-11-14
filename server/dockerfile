@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.8
 
 WORKDIR /server
 
@@ -8,10 +8,11 @@ ENV FLASK_ENV = production
 
 COPY ./requirements.txt .
 
-RUN pip3 install --upgrade pip
-RUN pip3 install -r requirements.txt
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+RUN pip install opencv-python-headless==4.5.3.56
 
 COPY . .
 
 EXPOSE 5000
-CMD [ "gunicorn","-b","0.0.0.0:5000","server:app" ]
+CMD [ "python","server.py" ]

@@ -4,12 +4,7 @@ from models.mrcnn import utils
 import models.mrcnn.model as modellib
 from models.mrcnn import visualize
 from models.mrcnn.model import log
-
-from tensorflow.keras.applications.vgg16 import VGG16
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.layers import Flatten
-
+from tensorflow.keras.models import load_model
 import numpy as np
 import skimage
 import os
@@ -129,13 +124,7 @@ class MaskRCNN:
 
 class TypeClassifier:
     def __init__(self):
-        self.model = Sequential()
-        self.model.add(VGG16(include_top=False, input_shape=(224, 224, 3)))
-
-        self.model.add(Flatten())
-        self.model.add(Dense(1024, activation='relu'))
-        self.model.add(Dense(3, activation='softmax'))
-        self.model.load_weights('models/classweights.h5')
+        self.model = load_model("models/classifier.h5")
 
     def infer_type(self, image):
         resized = cv2.resize(image, (224, 224), interpolation=cv2.INTER_AREA)

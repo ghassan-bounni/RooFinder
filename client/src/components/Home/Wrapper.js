@@ -4,7 +4,7 @@ const Wrapper = ({ children }) => {
   return (
     <div className="home">
       <div className="intro">
-        <h1>Header Goes Here</h1>
+        <h1>RooFinder</h1>
         <p>
           Automating the process of finding rooftop segments for solar
           photovoltaic panel installations to drastically reduce the cost and

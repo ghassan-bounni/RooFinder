@@ -31,7 +31,7 @@ const Step2 = ({ prevStep, nextStep, data }) => {
           }}
         >
           <img
-            src={"http://127.0.0.1:8000/" + data.masked_img}
+            src={"https://roofinder-api.herokuapp.com/" + data.masked_img}
             alt="segmentation"
             style={{ width: "100%" }}
           />
@@ -70,7 +70,7 @@ const Step2 = ({ prevStep, nextStep, data }) => {
                   <p>Type: {item.type}</p>
                 </div>
                 <img
-                  src={"http://127.0.0.1:8000/" + item.path}
+                  src={"https://roofinder-api.herokuapp.com/" + item.path}
                   alt="Rooftop"
                   style={{
                     width: "100px",
