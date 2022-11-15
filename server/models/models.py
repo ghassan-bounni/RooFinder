@@ -128,7 +128,8 @@ class TypeClassifier:
 
     def infer_type(self, image):
         resized = cv2.resize(image, (224, 224), interpolation=cv2.INTER_AREA)
-        result = self.model.predict([[resized]], steps=1)[0]
+        normalized = resized * (1/255)
+        result = self.model.predict([[normalized]], steps=1)[0]
         prediction = np.argmax(result, axis=-1)
         types = ["Brick", "Concrete", "Steel"]
         prediction = types[prediction]

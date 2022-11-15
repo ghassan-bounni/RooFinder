@@ -87,15 +87,6 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      <p
-        style={{
-          position: "fixed",
-          bottom: "3%",
-          left: "2%",
-        }}
-      >
-        Trinity-AI
-      </p>
     </div>
   );
 };
